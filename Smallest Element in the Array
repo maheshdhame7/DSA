@@ -1,0 +1,30 @@
+#include<stdio.h>
+void read(int arr[10],int n)
+{
+	printf("\n Enter the Element :");
+	for(int i=0;i<n;i++)
+	{
+		scanf("%d",&arr[i]);
+	}
+}
+int find_small(int arr[10],int n)
+{
+	int small=arr[0];
+	for(int i=1;i<n;i++)
+	{
+		if(arr[i]<small)
+		{
+			small=arr[i];
+		}
+	}
+	return small;
+}
+main()
+{
+	int num[10],n,small;
+	printf("\n Enter how many element do u want :");
+	scanf("%d",&n);
+	read(num,n);
+	small=find_small(num,n);
+	printf("\n Smallest element : %d",small);
+}
