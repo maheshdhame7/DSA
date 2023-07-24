@@ -1,0 +1,49 @@
+#include<stdio.h>
+
+main()
+{
+	int i,j,a[20][20],n;
+	printf("\n enter the dimentoin of matrix:");
+	scanf("%d",&n);
+	printf("\n enter %d  elements of matrix:",n*n);
+	for(i=0;i<n;i++)
+	for(j=0;j<n;j++)
+	scanf("%d",&a[i][j]);
+	printf("\n matrix is:");
+	for(i=0;i<n;i++)
+	{
+	printf("\n\n\t");
+	for(j=0;j<n;j++)
+	printf("%4d",a[i][j]);
+	}
+	//upper trangular matrix
+	printf("\n\t upper trangular matix:");
+	for(i=0;i<n;i++)
+	{
+		printf("\n\n\t");
+		for(j=0;j<n;j++)
+		{
+			if(i<=j)
+			{
+				printf("%3d",a[i][j]);
+			}
+			else
+			{
+				printf("   ");
+			}
+		}
+	}
+	//lower trangular matrix
+	printf("\n\t lower trangular matix:");
+	for(i=0;i<n;i++)
+	{
+		printf("\n\n\t");
+		for(j=0;j<n;j++)
+		{
+			if(i>=j)
+			{
+				printf("%3d",a[i][j]);
+			}
+		}
+	}
+}
