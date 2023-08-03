@@ -1,0 +1,180 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+	int data;
+	struct Node *addrprev;
+	struct Node *addrnext;
+}*start,*curr,*newnode,*last;
+struct Node* Create(int);
+struct Node* addNext(int);
+struct Node* Search(int);
+struct Node* InsertBeg(int);
+struct Node* InsertMiddle(int,int);
+void Display();
+main()
+{
+	int n,m,ch,ch1,o,pos;
+	start=NULL;
+	do
+	{
+		printf("\n\t 1. Create \n\t 2. Add Next \n\t 3. Display \n\t 4. Search \n\t 5. Insert Beg \n\t 6. Insert Middle");
+		printf("\n Select the Option :");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+				{
+					printf("\n Enter the number :");
+					scanf("%d",&n);
+					Create(n);
+					Display();
+				}
+			break;
+			
+			case 2:
+				{
+					printf("\n Enter the next node :");
+					scanf("%d",&m);
+					addNext(m);
+					Display();
+				}
+			break;
+			
+			case 3:
+				{
+					Display();
+				}
+			break;
+			
+			case 4:
+				{
+					printf("\n Enter the no. for search :");
+					scanf("%d",&o);
+					Search(o);
+				}
+			break;
+			
+			case 5:
+				{
+					printf("\n Enter the number :");
+					scanf("%d",&o);
+					InsertBeg(o);
+					Display();
+				}
+			break;
+			
+			case 6:
+				{
+					printf("\n Enter the no & pos :");
+					scanf("%d%d",&n,&pos);
+					InsertMiddle(n,pos);
+					Display();
+				}
+			break;
+			
+			default :
+				{
+					printf("\n Enter the correct option ...");
+				}
+		}
+		printf("\n Do u want to continue press 1 :");
+		scanf("%d",&ch1);
+	}while(ch1==1);
+	printf("\n Thank You...");
+}
+struct Node* Create(int n)
+{
+	newnode=(struct Node*)malloc(sizeof(struct Node));
+	newnode->data=n;
+	newnode->addrnext=NULL;
+	newnode->addrprev=NULL;
+	if(start==NULL)
+	{
+		start=newnode;
+		last=newnode;
+	}
+	return newnode;
+}
+struct Node* addNext(int n)
+{
+	last->addrnext=Create(n);
+	newnode->addrprev=last;
+	last=last->addrnext;
+}
+void Display()
+{
+	if(start==NULL)
+	{
+		printf("\n Linkedlist is empty...");
+	}
+	else
+	{
+		curr=start;
+		while(curr!=NULL)
+		{
+			printf("| %u | %d | %u |->",curr->addrprev,curr->data,curr->addrnext);
+			curr=curr->addrnext;
+		}
+	}
+}
+struct Node* Search(int n)
+{
+	int count=0;
+	int flag=0;
+	if(start==NULL)
+	{
+		printf("\n Linked list is empty ...");
+	}
+	else
+	{
+		curr=start;
+		while(curr!=NULL)
+		{
+			count++;
+			if(curr->data==n)
+			{
+				//flag=1;
+				printf("\n Element is found at %d pos ...",count);
+			}
+			curr=curr->addrnext;
+		}
+	}
+	/*if(flag==1)
+	{
+		printf("\n\t Number is found ...");
+	}
+	else
+	{
+		printf("\n\t Number is not found ...");
+	}*/
+}
+struct Node* InsertBeg(int n)
+{
+	newnode=(struct Node*)malloc(sizeof(struct Node));
+	newnode->data=n;
+	newnode->addrnext=start;
+	newnode->addrprev=NULL;
+	start->addrprev=newnode;
+	start=newnode;
+}
+struct Node* InsertMiddle(int n,int pos)
+{
+	int c=1;
+	curr=start;
+	while(c<pos-1)
+	{
+		curr=curr->addrnext;
+		c++;
+	}
+	newnode=(struct Node*)malloc(sizeof(struct Node));
+	newnode->data=n;
+	newnode->addrnext=curr->addrnext;
+	newnode->addrprev=curr;
+	curr->addrnext=newnode;
+	newnode->addrnext->addrprev=newnode;
+}
+
+
+
+
