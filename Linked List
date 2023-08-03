@@ -1,0 +1,62 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+	int data;
+	struct Node *addrnext;
+}*start,*newnode,*curr;
+
+struct Node* Create(int);
+void Display();
+main()
+{
+	int n,ch;
+	start=NULL;
+	do
+	{
+		printf("\n Enter the number :");
+		scanf("%d",&n);
+		Create(n);
+		Display();
+		printf("\n To continue press 1 :");
+		scanf("%d",&ch);
+	}while(ch==1);
+	printf("\n Thank You...");
+}
+struct Node* Create(int n)
+{
+	newnode=(struct Node*)malloc(sizeof(struct Node));
+	newnode->data=n;
+	newnode->addrnext=NULL;
+	if(start==NULL)
+	{
+		start=newnode;
+	}
+	else
+	{
+		curr=start;
+		while(curr->addrnext!=NULL)
+		{
+			curr=curr->addrnext;//increment step
+		}
+		curr->addrnext=newnode;
+	}
+	return newnode;
+}
+void Display()
+{
+	if(start==NULL)
+	{
+		printf("\n linked list not exist :");
+	}
+	else
+	{
+		curr=start;
+		while(curr!=NULL)
+		{
+			printf("| %d | %u |->",curr->data,curr->addrnext);
+			curr=curr->addrnext;
+		}
+	}
+}
+
