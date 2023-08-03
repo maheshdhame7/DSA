@@ -1,0 +1,136 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+	int data;
+	struct Node *addrnext;
+}*start,*newnode,*curr;
+
+struct Node* Create(int);
+void Display();
+struct Node* insertbeg(int);
+struct Node* insertMiddle(int,int);
+
+main()
+{
+	int n,ch,ch1,elm,m,pos;
+	start=NULL;
+	do
+	{
+		printf("\n\t 1. Create \n\t 2. Display \n\t 3. Insertbeg \n\t 4. Insert Middle \n\t 5. Insert Last \n\t 6. Delete First \n\t 7. Delete Middle \n\t 8. Search \n\t 9. Exist");
+		printf("\n\t Select the Option :");
+		scanf("%d",&ch1);
+		switch(ch1)
+		{
+			case 1:
+			{
+				printf("\n Enter the Element :");
+				scanf("%d",&n);
+				Create(n);
+				Display();
+			}
+			break;
+			
+			case 2:
+			{
+				Display();
+			}
+			break;
+			
+			case 3:
+			{
+				printf("\n Enter the Elemnet for insert first :");
+				scanf("%d",&elm);
+				insertbeg(elm);
+				Display();
+			}
+			break;	
+			
+			case 4:
+			{
+				printf("\n Enter the Element and Pos :");
+				scanf("%d%d",&m,&pos);
+				insertMiddle(m,pos);
+				Display();			
+			}
+			break;
+			
+			case 5:
+			{
+				printf("\n Enter the Element :");
+				scanf("%d",&n);
+				Create(n);	
+				Display();		
+			}
+			break;
+			
+			default :
+				{
+					printf("\n Enter the correct option ...");
+				}
+		}
+		printf("\n Do u Want to Continue press 1 :");
+		scanf("%d",&ch);
+	}while(ch==1);
+	printf("\n Thank You...");
+}
+struct Node* Create(int n)
+{
+	newnode=(struct Node*)malloc(sizeof(struct Node));
+	newnode->data=n;
+	newnode->addrnext=NULL;
+	if(start==NULL)
+	{
+		start=newnode;
+	}
+	else
+	{
+		curr=start;
+		while(curr->addrnext!=NULL)
+		{
+			curr=curr->addrnext;
+		}
+		curr->addrnext=newnode;
+	}
+}
+void Display()
+{
+	if(start==NULL)
+	{
+		printf("\n Linked list is not exist...");
+	}
+	else
+	{
+		curr=start;
+		while(curr!=NULL)
+		{
+			printf("| %d | %u |->",curr->data,curr->addrnext);
+			curr=curr->addrnext;
+		}
+	}
+}
+struct Node* insertbeg(int m)
+{
+	newnode=(struct Node*)malloc(sizeof(struct Node));
+	newnode->data=m;
+	newnode->addrnext=start;
+	start=newnode;
+	
+}
+struct Node* insertMiddle(int elm,int pos)
+{
+	int count=1;
+	curr=start;
+	while(count<pos-1)
+	{
+		curr=curr->addrnext;
+		count++;
+	}
+	newnode=(struct Node*)malloc(sizeof(struct Node));
+	newnode->data=elm;
+	newnode->addrnext=curr->addrnext;
+	curr->addrnext=newnode;
+}
+
+
+
