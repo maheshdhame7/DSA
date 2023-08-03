@@ -1,0 +1,90 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+	int data;
+	struct Node *addrnext;
+}*start,*last,*curr,*newnode;
+void Create(int);
+void Display();
+main()
+{
+	start=NULL;
+	last=NULL;
+	int n,ch,ch1;
+	do
+	{
+		printf("\n\t 1. Create \n\t 2. Addnext \n\t 3. Display");
+		printf("\n\t Enter the choice :");
+		scanf("%d",&ch);
+		switch(ch)
+		{
+			case 1:
+				{
+					printf("\n\t Enter the node :");
+					scanf("%d",&n);
+					Create(n);
+					Display();
+				}
+			break;
+			
+			case 2:
+				{
+					printf("\n\t Enter the node :");
+					scanf("%d",&n);
+					Create(n);
+					Display();
+				}
+			case 3:
+				{
+					Display();
+				}
+			break;
+		}
+		printf("\n\t for continous press 1 :");
+		scanf("%d",&ch1);
+	}while(ch1==1);
+	printf("\n\t Thank You ...");
+}
+void Create(int n)
+{
+	newnode=malloc(sizeof(struct Node));
+	newnode->data=n;
+	newnode->addrnext=NULL;
+	
+	if(last==NULL)
+	{
+		last=newnode;
+		last->addrnext=last;
+	}
+	else
+	{
+		newnode->addrnext=last->addrnext;
+		last->addrnext=newnode;
+		last=newnode;
+	}
+	
+}
+void Display()
+{
+	if(last == NULL)
+	{
+		printf("\n\t Linkedlist is empty...");
+	}
+	else
+	{
+		curr=last->addrnext;
+		do
+		{
+			printf("| %d | %u | ->",curr->data,curr->addrnext);
+			curr=curr->addrnext;
+		}while(curr!=last->addrnext);
+	}
+}
+
+
+
+
+
+
+
